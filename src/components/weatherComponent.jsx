@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 import "./weatherComponent.css";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Brightness5Icon from "@mui/icons-material/Brightness5";
+import AirIcon from "@mui/icons-material/Air";
+
 const WeatherComponent = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
@@ -31,8 +39,8 @@ const WeatherComponent = () => {
     setWeatherObject(weatherDataFromFetch);
     setIsWeather(true);
   }
-  function getWeatherFromApi(latitude, longitude) {
-    if (coords === true && isWeather === false) {
+  function getWeatherFromApi(latitude, longitude, refresh) {
+    if ((coords === true && isWeather === false) || refresh === true) {
       fetch("http://localhost:3001/weather", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -50,39 +58,51 @@ const WeatherComponent = () => {
       setIsWeather(true);
     }
   }
+
   return (
     <div>
       {coords === true && isWeather === false ? (
-        <button
+        <Button
           onClick={() => {
-            getWeatherFromApi(latitude, longitude);
+            getWeatherFromApi(latitude, longitude, false);
           }}
-          text="Get local weather"
+          variant="contained"
+          sx={{ margin: 2 }}
         >
           Get Weather
-        </button>
+        </Button>
       ) : (
         <p></p>
       )}
       {isWeather === true ? (
-        <div className="weather-widget">
-          <p>Conditions: {weatherObject.weather[0].description}</p>
-          <h1>
-            {Math.trunc(weatherObject.main.temp - 273.15)}
-            <sup>o</sup>
-          </h1>
-          <p>
-            Feels like: {Math.trunc(weatherObject.main.feels_like - 273.15)}
-            <sup>o</sup> C
-          </p>
-          <p>Wind: {weatherObject.wind.speed} km/h</p>
-          <p>Location: {weatherObject.name}</p>
-        </div>
-      ) : coords === false ? (
-        <p>Location not provided</p>
-      ) : (
-        <p></p>
-      )}
+        <Card sx={{ minWidth: 275, margin: 2 }}>
+          <CardContent>
+            <Typography variant="body2">
+              {weatherObject.weather[0].description === "clear sky" ? (
+                <Brightness5Icon />
+              ) : null}
+            </Typography>
+            <Typography variant="h3" component="div">
+              {Math.trunc(weatherObject.main.temp - 273.15)}
+              <sup>o</sup>
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              Feels like: {Math.trunc(weatherObject.main.feels_like - 273.15)}
+            </Typography>
+            <Typography variant="body2">
+              <AirIcon /> {weatherObject.wind.speed} km/h
+            </Typography>
+            <Typography color="text.secondary">{weatherObject.name}</Typography>
+          </CardContent>
+          <CardActions>
+            <Button
+              onClick={() => getWeatherFromApi(latitude, longitude, true)}
+            >
+              Refresh
+            </Button>
+          </CardActions>
+        </Card>
+      ) : null}
     </div>
   );
 };
