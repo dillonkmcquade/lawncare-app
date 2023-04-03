@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
+import { Box } from "@mui/system";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
@@ -7,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Brightness5Icon from "@mui/icons-material/Brightness5";
 import AirIcon from "@mui/icons-material/Air";
 
-const WeatherComponent = () => {
+const WeatherComponent = (alignSelf) => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const [isWeather, setIsWeather] = useState(
@@ -59,7 +60,7 @@ const WeatherComponent = () => {
   }
 
   return (
-    <div>
+    <Box>
       {coords === true && isWeather === false ? (
         <Button
           onClick={() => {
@@ -74,7 +75,7 @@ const WeatherComponent = () => {
         <p></p>
       )}
       {isWeather === true ? (
-        <Card sx={{ minWidth: 275, margin: 2 }}>
+        <Card sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography variant="body2">
               {weatherObject.weather[0].description === "clear sky" ? (
@@ -102,7 +103,7 @@ const WeatherComponent = () => {
           </CardActions>
         </Card>
       ) : null}
-    </div>
+    </Box>
   );
 };
 export default WeatherComponent;
