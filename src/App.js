@@ -20,27 +20,35 @@ import Sidebar from "./global/Sidebar.jsx";
 import SignIn from "./pages/signin.jsx";
 
 const App = () => {
-  const [signedIn, setSignedIn] = useState(
-    localStorage.getItem("signedIn") === "true"
-  );
-  return (
-    <div>
-      {signedIn === false ? (
-        <Box className="app">
-          <CssBaseline />
-          <Appbar />
-          <Sidebar />
-          <main className="content">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-            </Routes>
-          </main>
-        </Box>
-      ) : (
-        <SignIn />
-      )}
-    </div>
-  );
+    const [signedIn, setSignedIn] = useState(
+        localStorage.getItem("signedIn") === "false"
+    );
+    return (
+        <div>
+            {signedIn === true ? (
+                <Box className="app">
+                    <CssBaseline />
+                    <Appbar />
+                    <Sidebar />
+                    <main className="content">
+                        <Routes>
+                            <Route path="/" element={<Dashboard />} />
+                        </Routes>
+                    </main>
+                </Box>
+            ) : (
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%'
+                }}>
+                    <Appbar />
+                    <SignIn setSignedIn={setSignedIn} />
+                </Box>
+            )}
+        </div>
+    );
 };
 
 export default App;
