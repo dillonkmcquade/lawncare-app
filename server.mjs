@@ -11,6 +11,7 @@ app.use(express.json());
 const apiKey = process.env.OPENWEATHER_APIKEY;
 
 app.get("/", (req, res) => {
+    console.log(req.body)
   res.status(200).send("Weather app server is running");
 });
 
@@ -22,7 +23,7 @@ app.post("/weather", (req, res) => {
   )
     .then((response) => response.json())
     .then((weatherData) => res.status(200).send(weatherData))
-    .catch((err) => res.status(400).json("Error"));
+    .catch((err) => res.status(400).json(err));
 });
 
 app.listen(port, () => {

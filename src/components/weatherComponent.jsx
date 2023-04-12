@@ -60,7 +60,7 @@ const WeatherComponent = (alignSelf) => {
   }
 
   return (
-    <Box>
+    <Box sx={{ minWidth: "275px", height: "300px" }}>
       {coords === true && isWeather === false ? (
         <Button
           onClick={() => {
@@ -74,8 +74,8 @@ const WeatherComponent = (alignSelf) => {
       ) : (
         <p></p>
       )}
-      {isWeather === true ? (
-        <Card sx={{ minWidth: 275 }}>
+      {isWeather ? (
+        <Card>
           <CardContent>
             <Typography variant="body2">
               {weatherObject.weather[0].description === "clear sky" ? (
