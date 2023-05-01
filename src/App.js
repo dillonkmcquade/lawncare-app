@@ -25,7 +25,7 @@ const App = () => {
     );
     return (
         <div>
-            {signedIn === true ? (
+            {signedIn === false ? (
                 <Box className="app">
                     <CssBaseline />
                     <Appbar />

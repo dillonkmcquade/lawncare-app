@@ -1,4 +1,5 @@
 Session.vim
+.prettierrc
 node_modules/
 build/
 tags

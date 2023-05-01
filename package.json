@@ -8,13 +8,10 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.15",
+    "@mui/system": "^5.12.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-sslify": "^1.2.0",
-    "node-fetch": "^3.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
@@ -25,9 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "node-server": "nodemon server.mjs",
-    "dev": "concurrently --kill-others \"npm run start\" \"npm run node-server\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -49,8 +44,7 @@
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
-    "eslint-prettier": "^0.0.0-empty",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.4"
+    "prettier": "^2.8.8"
   }
 }
